@@ -1,5 +1,5 @@
 import { Router } from "express"
-import {dobro, CorPrimaria, ingresso, frequenciaCaracter, maiorNumero, media, temperatura } from './services.js'
+import {dobro, CorPrimaria, ingresso, frequenciaCaracter, maiorNumero, media, temperatura,somar } from './services.js'
 
 const server = Router();
 
@@ -24,7 +24,7 @@ server.get('/somar', (req, resp) => {
 })
 
 
-server.post('/somar', (req, resp) => {
+server.post('/somar1', (req, resp) => {
     try{
     const { valores:{a: number1, b: number2} } = req.body;
 
@@ -40,16 +40,38 @@ server.post('/somar', (req, resp) => {
     }  
 })
 
-server.get('/temperatura/', (req,resp) => {
-    let a = Boolean(req.query.a);
+server.get('/temperatura', (req, resp) =>{
+    try{
+    const t = Number(req.query.t);
 
-    let x = temperatura(a);
-
+    const x = temperatura(t);
     resp.send({
-        febre : a
+        febre:x
     })
+    }catch(err){
+        resp.send({
+            err:err.message
+        })
+    }
+})
 
- })
+
+server.post('/somar', (req, resp) => {
+    try{
+    const { a, b } = req.body;
+    
+    const x = somar(a, b);
+    
+    resp.send({
+    soma: x
+    })
+    }
+    catch (err) {
+    resp.send({
+    err: err.message
+    })
+    }
+    })
 
 server.post('/medianota',(req, resp) => {
 
@@ -119,7 +141,7 @@ server.get('/dia2/corprimaria/:cor', (req, resp) =>{
  })
 
 
- server.post('/dia2/maiorNumero', (req, resp) => {
+ server.post('/maiorNumero', (req, resp) => {
      try {
          const numeros = req.body;
          const maior = maiorNumero(numeros);

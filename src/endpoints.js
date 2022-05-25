@@ -23,6 +23,25 @@ server.get('/somar', (req, resp) => {
     })
 })
 
+server.get('/tabuada', (req, resp) => {
+    try {
+    const a = Number(req.query.n);
+    
+    const x = tabuada(a);
+    
+    resp.send({
+    tabuada: x
+    })
+    }
+    catch (err) {
+    resp.send({
+    err:err.message
+    })
+    }
+    })
+    
+    
+
 
 server.post('/somar1', (req, resp) => {
     try{

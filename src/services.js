@@ -43,6 +43,13 @@ export function maiorNumero(numeros){
     return maior;
 }
 
+export function tabuada(num){
+    for(let cont = 1; cont <=10; cont++ ){
+        let x = cont * num
+    }
+    return x;
+}
+
 export function media(n1,n2,n3){
     return (n1+n2+n3) / 3;
     }

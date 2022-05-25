@@ -42,3 +42,19 @@ export function maiorNumero(numeros){
     }
     return maior;
 }
+
+export function media(n1,n2,n3){
+    return (n1+n2+n3) / 3;
+    }
+    
+    export function temperatura(temp){
+        let t = temp
+         t= false    
+    
+        if(t > 37){
+            t = true;
+        }
+        
+        return t;
+    }
+    

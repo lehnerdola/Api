@@ -1,5 +1,5 @@
 import { Router } from "express"
-import {dobro, CorPrimaria, ingresso, frequenciaCaracter, maiorNumero } from './services.js'
+import {dobro, CorPrimaria, ingresso, frequenciaCaracter, maiorNumero, media, temperatura } from './services.js'
 
 const server = Router();
 
@@ -39,6 +39,35 @@ server.post('/somar', (req, resp) => {
         })
     }  
 })
+
+server.get('/temperatura/', (req,resp) => {
+    let a = Boolean(req.query.a);
+
+    let x = temperatura(a);
+
+    resp.send({
+        febre : a
+    })
+
+ })
+
+server.post('/medianota',(req, resp) => {
+
+    try{
+    const {n1,n2,n3} = req.body
+
+    const x = media(n1,n2,n3);
+
+    resp.send({
+        media: x
+    })
+}   catch(err){
+    resp.status(404).send({
+        erro: err.message
+    })
+}
+})
+
 
 
 server.get('/dia2/corprimaria/:cor', (req, resp) =>{
